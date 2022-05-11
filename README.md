@@ -1,7 +1,7 @@
 # City Explorer
 
 **Author**: Martha Quintanilla-Ramirez
-**Version**: 1.0.0 
+**Version**: 1.0.0
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
@@ -23,10 +23,12 @@
 
 Name of feature: Asynchronous code, and APIs
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 60mins
 
-Start time: _____
+Authors: Martha, Jim, Sarah
 
-Finish time: _____
+Start time: 8:30pm
 
-Actual time needed to complete: _____
+Finish time: 9:30pm
+
+Actual time needed to complete: 1 hour
