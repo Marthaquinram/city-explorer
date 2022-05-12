@@ -1,12 +1,20 @@
+import React from "react";
+import "./App.css";
+import axios from "axios";
+import Main from "./Main";
 
-import './App.css';
+class App extends React.Component {
+  
+  
 
-function App() {
-  return (
-    <div className="App">
-      
-    </div>
-  );
+  render() {
+    console.log("this.state in App.js: ", this.state);
+    return (
+      <div className="App">
+       <Main />
+      </div>
+    );
+  }
 }
 
 export default App;
