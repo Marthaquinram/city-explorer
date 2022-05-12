@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
- import axios from "axios";
-// import { Form } from "react-bootstrap";
+import axios from "axios";
 
 class Main extends React.Component {
   constructor(props) {
