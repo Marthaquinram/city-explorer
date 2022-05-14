@@ -20,9 +20,7 @@ class Main extends React.Component {
     console.log("Url" , url);
     const response = await axios.get(url);
     console.log("Response from Axios: ", response.data);
-    this.setState({ locationName: response.data[0].display_name });
-    this.setState({ lon: response.data[0].lon });
-    this.setState({ lat: response.data[0].lat });
+    this.setState({ locationName: response.data[0].display_name,lon: response.data[0].lon, lat: response.data[0].lat});
     console.log("response from state: ", this.state.lat);
     } catch(error){
       this.handleError(error);
@@ -36,9 +34,9 @@ class Main extends React.Component {
       <div className="App">
        <h1>Welcome to City Explorer!</h1>
         <input onChange={(event) => this.setState({ searchQuery: event.target.value})} placeholder="search for city!" />
+        <button onClick={this.getLocation}>Explore!</button> 
         <Map lat={this.state.lat} lon={this.state.lon}
         responseError={this.state.responseError}/>
-        <button onClick={this.getLocation}>Explore!</button> 
         {this.state.locationName && this.state.lat && this.state.lon &&
         <div className="results"> <h2> The city we search for is {this.state.locationName}, 
         Latitude: {this.state.lat}, 
