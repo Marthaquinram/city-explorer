@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import axios from "axios";
 import Map from "./Map";
+import Weather from "./Weather";
 
 class Main extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class Main extends React.Component {
       locationName: "",
       lon: "",
       lat: "",
-      reponseError: ""
+      reponseError: "",
+      forecastData: []
     };
   }
   getLocation = async () => {
@@ -26,6 +28,17 @@ class Main extends React.Component {
       this.handleError(error);
     }
   };
+  getWeather = async () =>{
+    const url = `http://localhost:3001/weather?cities=${this.state.searchQuery}`;
+    const response = await axios.get(url);
+    this.setState({ forecastData: response.data.weathArr.map(days => `On this day,${days.data}, ${days.description}`)})
+  };
+  handleClick = (event) => {
+    event.preventDefault();
+    this.getLocation();
+    this.getWeather();
+  };
+
   handleError = (error) => {
     this.setState({ responseError: `ERRORRRRR: CODE ${error.response.status}, ${error.response.data.error}`})
   }
@@ -34,9 +47,10 @@ class Main extends React.Component {
       <div className="App">
        <h1>Welcome to City Explorer!</h1>
         <input onChange={(event) => this.setState({ searchQuery: event.target.value})} placeholder="search for city!" />
-        <button onClick={this.getLocation}>Explore!</button> 
+        <button onClick={this.handleClick} >Explore!</button> 
         <Map lat={this.state.lat} lon={this.state.lon}
         responseError={this.state.responseError}/>
+        <Weather forecast={this.state.forecastData} />
         {this.state.locationName && this.state.lat && this.state.lon &&
         <div className="results"> <h2> The city we search for is {this.state.locationName}, 
         Latitude: {this.state.lat}, 
