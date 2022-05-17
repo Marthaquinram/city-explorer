@@ -29,9 +29,13 @@ class Main extends React.Component {
     }
   };
   getWeather = async () =>{
+    try {
     const url = `http://localhost:3001/weather?cities=${this.state.searchQuery}`;
     const response = await axios.get(url);
     this.setState({ forecastData: response.data.weathArr.map(days => `On this day,${days.data}, ${days.description}`)})
+  } catch(error){
+    this.handleError(error);
+  }
   };
   handleClick = (event) => {
     event.preventDefault();
