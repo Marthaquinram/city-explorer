@@ -34,16 +34,16 @@ class Main extends React.Component {
   render() {
     return (
       <div className="App">
-       <h1>Welcome to City Explorer!</h1>
+       {/* <h1>Welcome to City Explorer!</h1>
         <input onChange={(event) => this.setState({ searchQuery: event.target.value})} placeholder="search for city!" />
-        <Map lat={this.state.lat} lon={this.state.lon}
-        responseError={this.state.responseError}/>
-        <button onClick={this.getLocation}>Explore!</button> 
         {this.state.locationName && this.state.lat && this.state.lon &&
         <div className="results"> <h2> The city we search for is {this.state.locationName}, 
         Latitude: {this.state.lat}, 
         Longitude: {this.state.lon}</h2> </div>
-        }
+        } */}
+        {/* <button onClick={this.getLocation}>Explore!</button>  */}
+        <Map lat={this.state.lat} lon={this.state.lon}
+        responseError={this.state.responseError}/>
        </div>
     );
   }
