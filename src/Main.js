@@ -48,15 +48,18 @@ class Main extends React.Component {
   };
 
   handleError = (error) => {
-    this.setState({ responseError: `ERRORRRRR: CODE ${error.response.status}, ${error.response.data.error}`})
+    this.setState({ 
+      responseError: `ERRORRRRR: CODE ${error.response.status}, ${error.response.data.error}`,
+      forecastData: [],
+      locationName: '',
+  })
   }
   render() {
     console.log('main state: ', this.state);
     return (
       <div className="App">
        <h1>Welcome to City Explorer!</h1>
-        {/* <input onChange={(event) => this.setState({ searchQuery: event.target.value})} placeholder="search for city!" />
-        <button onClick={this.handleClick} >Explore!</button>  */}
+        
         <Form onSubmit={this.getLocation}>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Search for a city!</Form.Label>
@@ -70,18 +73,17 @@ class Main extends React.Component {
             </Button>
         </Form>
         {
-         this.state.locationName && 
-          <Map lat={this.state.lat} lon={this.state.lon}
-          responseError={this.state.responseError}/>
-        }
-        <Weather forecast={this.state.forecastData} />
-        {
-          this.state.locationName && this.state.lat && this.state.lon &&
-          <div className="results"> <h2> The city we search for is {this.state.locationName}, 
-          Latitude: {this.state.lat}, 
-          Longitude: {this.state.lon}</h2> </div>
-        }
-       </div>
+         this.state.locationName ?  
+          <>
+            <Map lat={this.state.lat} lon={this.state.lon}
+            responseError={this.state.responseError}/>
+            <div className="results"> <h2> The city we search for is {this.state.locationName}, 
+            Latitude: {this.state.lat}, 
+            Longitude: {this.state.lon}</h2> </div>
+            <Weather forecast={this.state.forecastData} />
+          </>
+        : <h3> {this.state.responseError}</h3>}
+      </div>
     );
   }
 }
