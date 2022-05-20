@@ -26,22 +26,38 @@ class Main extends React.Component {
     console.log("Url" , url);
     const response = await axios.get(url);
     console.log("Response from Axios: ", response.data);
-    this.setState({ locationName: response.data[0].display_name,lon: response.data[0].lon, lat: response.data[0].lat});
+    this.setState({ locationName: response.data[0].display_name,lon: response.data[0].lon, lat: response.data[0].lat}, this.showMeAll);
     console.log("response from state: ", this.state.lat);
     } catch(error){
       this.handleError(error);
     }
-    this.getWeather();
   };
   getWeather = async () =>{
     try {
-    const url = `http://localhost:3001/weather?cities=${this.state.searchQuery}`;
+    const url = `http://localhost:3001/weather?lat=${this.state.lat}&lon=${this.state.lon}`;
     const response = await axios.get(url);
-    this.setState({ forecastData: response.data.map(days => `On this day, ${days.data}, ${days.description}`)})
-  } catch(error){
+    this.setState({ forecastData: response.data.map(days => `On this day, ${days.date}, ${days.description}`)})
+    } catch(error){
     this.handleError(error);
   }
+}
+
+  getMovie = async() =>{
+    try {
+      const url = `http://localhost:3001/movies?search=${this.state.locationName}`;
+      const response = await axios.get(url);
+      this.setState({ movieData: response.data.map(movies => (<p> {movies.title}, {movies.description}</p>))}, console.log(this.state.movieData))
+    } catch(error){
+      this.handleError(error);
+    }
   };
+  //TODO:create a helper function that calls getweather and get movie.
+  //on line 29 update this.getWeather to the new helper function.
+  showMeAll = () => {
+    this.getMovie();
+    this.getWeather();
+  }
+
   handleClick = (event) => {
     event.preventDefault();
     this.getLocation();
@@ -49,14 +65,13 @@ class Main extends React.Component {
 
   handleError = (error) => {
     this.setState({ responseError: `ERRORRRRR: CODE ${error.response.status}, ${error.response.data.error}`})
-  }
+  };
+
   render() {
     console.log('main state: ', this.state);
     return (
       <div className="App">
        <h1>Welcome to City Explorer!</h1>
-        {/* <input onChange={(event) => this.setState({ searchQuery: event.target.value})} placeholder="search for city!" />
-        <button onClick={this.handleClick} >Explore!</button>  */}
         <Form onSubmit={this.getLocation}>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Search for a city!</Form.Label>
