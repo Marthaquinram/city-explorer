@@ -5,6 +5,7 @@ import Map from "./Map";
 import Weather from "./Weather";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import Movies from './Movies';
 
 class Main extends React.Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class Main extends React.Component {
       lon: "",
       lat: "",
       reponseError: "",
-      forecastData: []
+      forecastData: [],
+      movieData: ""
     };
   }
   getLocation = async (event) => {
@@ -44,10 +46,10 @@ class Main extends React.Component {
 
   getMovie = async() =>{
     try {
-      const url = `http://localhost:3001/movies?search=${this.state.locationName}`;
+      const url = `${process.env.REACT_APP_SERVER}/movies?search=${this.state.locationName}`;
       const response = await axios.get(url);
-      this.setState({ movieData: response.data.map(movies => (<p> {movies.title}, {movies.description}</p>))}, console.log(this.state.movieData))
-    } catch(error){
+      this.setState({ movieData: response.data.map(movies => (<> <p> {movies.title}, {movies.description}, {movies.avgVotes}{movies.totalVotes}{movies.popylarity}{movies.release}</p> <img src={movies.poster} alt={movies.title} /></>))}, console.log(this.state.movieData));
+      }  catch(error){
       this.handleError(error);
     }
   };
@@ -96,6 +98,7 @@ class Main extends React.Component {
           Latitude: {this.state.lat}, 
           Longitude: {this.state.lon}</h2> </div>
         }
+        <Movies movieSug={this.state.movieData}/>
        </div>
     );
   }
