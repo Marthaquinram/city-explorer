@@ -4,7 +4,7 @@ class Movies extends React.Component {
   render() {
     return (
   <>
-  {this.props.movieSug && 
+  {
   this.props.movieSug
 }
   </>
