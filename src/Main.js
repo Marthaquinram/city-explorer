@@ -36,7 +36,7 @@ class Main extends React.Component {
   };
   getWeather = async () =>{
     try {
-    const url = `http://localhost:3001/weather?lat=${this.state.lat}&lon=${this.state.lon}`;
+    const url = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.lat}&lon=${this.state.lon}`;
     const response = await axios.get(url);
     this.setState({ forecastData: response.data.map(days => `On this day, ${days.date}, ${days.description}`)})
     } catch(error){
