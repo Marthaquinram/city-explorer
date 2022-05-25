@@ -1,15 +1,15 @@
-// import React from "react";
-// import "./App.css";
+import React from "react";
 
-// class weatherDay extends React.Component {
 
-//     render() {
-//     return (
-//       <div className="App">
-    
-//       </div>
-//     );
-//   }
-// }
+class WeatherDay extends React.Component {
 
-// export default weatherDay;
+    render() {
+    return (
+      <div className="App">
+    <h1>{this.props.date} {this.props.description}</h1>
+      </div>
+    );
+  }
+}
+
+export default WeatherDay;

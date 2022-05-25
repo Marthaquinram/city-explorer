@@ -1,14 +1,19 @@
 import React from "react";
 import "./App.css";
+import WeatherDay from "./WeatherDay";
 
 class Weather extends React.Component {
 
     render() {
     return (
       <div className="App">
-    <h3>{this.props.forecast[0]}</h3>
-    <h3>{this.props.forecast[1]}</h3>
-    <h3>{this.props.forecast[2]}</h3>
+        {this.props.forecast && 
+        this.props.forecast.map(day => (
+        <WeatherDay date={day.date} description={day.description} />
+
+        ))
+        
+        } 
        
       </div>
     );

@@ -16,7 +16,7 @@ class Main extends React.Component {
       lon: "",
       lat: "",
       reponseError: "",
-      forecastData: [],
+      forecastData: "",
       movieData: ""
     };
   }
@@ -38,7 +38,7 @@ class Main extends React.Component {
     try {
     const url = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.lat}&lon=${this.state.lon}`;
     const response = await axios.get(url);
-    this.setState({ forecastData: response.data.map(days => `On this day, ${days.date}, ${days.description}`)})
+    this.setState({ forecastData: response.data});
     } catch(error){
     this.handleError(error);
   }
@@ -48,13 +48,12 @@ class Main extends React.Component {
     try {
       const url = `${process.env.REACT_APP_SERVER}/movies?search=${this.state.locationName}`;
       const response = await axios.get(url);
-      this.setState({ movieData: response.data.map(movies => (<> <p> {movies.title}, {movies.description}, {movies.avgVotes}{movies.totalVotes}{movies.popylarity}{movies.release}</p> <img src={movies.poster} alt={movies.title} /></>))}, console.log(this.state.movieData));
+      this.setState({ movieData: response.data });
       }  catch(error){
       this.handleError(error);
     }
   };
-  //TODO:create a helper function that calls getweather and get movie.
-  //on line 29 update this.getWeather to the new helper function.
+  
   showMeAll = () => {
     this.getMovie();
     this.getWeather();
