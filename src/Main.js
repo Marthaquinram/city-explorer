@@ -71,7 +71,7 @@ class Main extends React.Component {
   render() {
     console.log('main state: ', this.state);
     return (
-      <div className="App">
+      <div className="App" id="main">
        <h1>Welcome to City Explorer!</h1>
         <Form onSubmit={this.getLocation}>
           <Form.Group className="mb-3" controlId="name">
