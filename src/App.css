@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -28,26 +29,44 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-}
+} */
 .results{
 color: teal;
 
 }
-/* .formy{
-  color: ;
-} */
+
 #button{
   color: blueviolet;
   background-color: pink;
   
 }
+
 .map{
   margin-top: 50px;
+}
+
+.weatherday{
+  display:inline-flex;
+  
+}
+
+
+#card{
+  background-color: rgb(159, 104, 211);
+  justify-content: space-evenly;
+  color: white;
+  font-size: small;
+  height: 40rem;
+  
+  margin: 10px 20px 35px;
+}
+#main{
+  background-color: lightblue;
 }
